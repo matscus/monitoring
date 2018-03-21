@@ -4,14 +4,14 @@ Monitoring
 A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
-***If you're looking for the Docker Swarm version please go to [stefanprodan/swarmprom](https://github.com/stefanprodan/swarmprom)***
+***If you're looking for the Docker Swarm version please go to [matscus/monitoring](https://github.com/matscus/monitoring)***
 
 ## Install
 
 Clone this repository on your Docker host, cd into dockprom directory and run compose up:
 
 ```bash
-git clone https://github.com/stefanprodan/dockprom
+git clone https://github.com/matscus/monitoring
 cd dockprom
 
 ADMIN_USER=admin ADMIN_PASSWORD=admin docker-compose up -d
