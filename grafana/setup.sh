@@ -1,18 +1,10 @@
 #!/bin/bash
 
-# Taken from https://github.com/grafana/grafana-docker/issues/74
-
-# Script to configure grafana datasources and dashboards.
-# Intended to be run before grafana entrypoint...
-# Image: grafana/grafana:4.1.2
-# ENTRYPOINT [\"/run.sh\"]"
 
 GRAFANA_URL=${GRAFANA_URL:-http://$GF_SECURITY_ADMIN_USER:$GF_SECURITY_ADMIN_PASSWORD@localhost:3000}
-#GRAFANA_URL=http://grafana-plain.k8s.playground1.aws.ad.zopa.com
 DATASOURCES_PATH=${DATASOURCES_PATH:-/etc/grafana/datasources}
 DASHBOARDS_PATH=${DASHBOARDS_PATH:-/etc/grafana/dashboards}
 
-# Generic function to call the Vault API
 grafana_api() {
   local verb=$1
   local url=$2
