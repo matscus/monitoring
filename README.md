@@ -4,45 +4,42 @@ Monitoring
 A monitoring solution for Docker hosts and containers with [Prometheus](https://prometheus.io/), [Grafana](http://grafana.org/), [cAdvisor](https://github.com/google/cadvisor), 
 [NodeExporter](https://github.com/prometheus/node_exporter) and alerting with [AlertManager](https://github.com/prometheus/alertmanager).
 
-***If you're looking for the Docker Swarm version please go to [matscus/monitoring](https://github.com/matscus/monitoring)***
-
 ## Install
 
-Clone this repository on your Docker host, cd into dockprom directory and run compose up:
+Clone this repository, cd into dockprom directory and run compose up:
 
 ```bash
 git clone https://github.com/matscus/monitoring
-cd dockprom
+cd monitoring
 
 ADMIN_USER=admin ADMIN_PASSWORD=admin docker-compose up -d
 ```
 
 Prerequisites:
 
-* Docker Engine >= 1.13
+* Docker >= 1.13
 * Docker Compose >= 1.11
 
 Containers:
 
-* Prometheus (metrics database) `http://<host-ip>:9090`
-* AlertManager (alerts management) `http://<host-ip>:9093`
-* Grafana (visualize metrics) `http://<host-ip>:3000`
-* NodeExporter (host metrics collector)
-* cAdvisor (containers metrics collector)
-* Caddy (reverse proxy and basic auth provider for prometheus and alertmanager) 
+* Prometheus`http://<host-ip>:9090`
+* AlertManager `http://<host-ip>:9093`
+* Grafana `http://<host-ip>:3000`
+* NodeExporter 
+* cAdvisor 
+* Caddy 
 
 ## Setup Grafana
 
 Navigate to `http://<host-ip>:3000` and login with user ***admin*** password ***admin***. You can change the credentials in the compose file or by supplying the `ADMIN_USER` and `ADMIN_PASSWORD` environment variables on compose up.
 
-Grafana is preconfigured with dashboards and Prometheus as the default data source:
-
+Grafana is preconfigured the default data source of Prometheus:
 * Name: Prometheus
 * Type: Prometheus
 * Url: http://prometheus:9090
 * Access: proxy
 
-***Docker Host Dashboard***
+***Docker Host***
 
 ![Host](https://github.com/matscus/monitoring/blob/master/screens/Host.png)
 
@@ -50,10 +47,10 @@ The Docker Host Dashboard shows key metrics for monitoring the resource usage of
 
 * Server uptime, CPU idle percent, number of CPU cores, available memory, swap and storage
 * System load average graph, running and blocked by IO processes graph, interrupts graph
-* CPU usage graph by mode (guest, idle, iowait, irq, nice, softirq, steal, system, user)
-* Memory usage graph by distribution (used, free, buffers, cached)
-* IO usage graph (read Bps, read Bps and IO time)
-* Network usage graph by device (inbound Bps, Outbound Bps)
+* CPU usage graph by mode 
+* Memory usage graph by distribution 
+* IO usage graph 
+* Network usage graph by device 
 * Swap usage and activity graphs
 
 For storage and particularly Free Storage graph, you have to specify the fstype in grafana graph request.
@@ -67,7 +64,7 @@ You can find right value for your system in Prometheus `http://<host-ip>:9090` l
 
       node_filesystem_free
 
-***Docker Containers Dashboard***
+***Docker Containers***
 
 ![Containers](https://github.com/matscus/monitoring/blob/master/screens/Containers.png)
 
@@ -83,7 +80,7 @@ The Docker Containers Dashboard shows key metrics for monitoring running contain
 
 Note that this dashboard doesn't show the containers that are part of the monitoring stack.
 
-***Monitor Services Dashboard***
+***Monitor Services***
 
 ![Monitor Services](https://github.com/matscus/monitoring/blob/master/screens/Prometheus.png)
 
@@ -126,7 +123,7 @@ curl -X POST http://admin:admin@<host-ip>:9090/-/reload
 
 ***Monitoring services alerts***
 
-Trigger an alert if any of the monitoring targets (node-exporter and cAdvisor) are down for more than 30 seconds:
+Trigger an alert if any of the monitoring targets are down for more than 30 seconds (node-exporter and cAdvisor):
 
 ```yaml
 ALERT monitor_service_down
