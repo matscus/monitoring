@@ -15,11 +15,12 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1614693244494,
+  "id": 7,
+  "iteration": 1626854856337,
   "links": [],
   "panels": [
     {
-      "datasource": "-- Mixed --",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -33,9 +34,9 @@
             "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
-              "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -44,11 +45,17 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "decimals": 1,
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -74,7 +81,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#bf1b00",
+                  "fixedColor": "dark-red",
                   "mode": "fixed"
                 }
               }
@@ -89,7 +96,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "#629e51",
+                  "fixedColor": "dark-green",
                   "mode": "fixed"
                 }
               }
@@ -107,23 +114,23 @@
       "interval": "$aggregation",
       "links": [],
       "options": {
-        "graph": {},
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "single"
         }
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
-          "datasource": "Prometheus",
-          "expr": "sum by (requestStatus) (rate(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[$scrapeInterval]))",
+          "exemplar": true,
+          "expr": "sum by (requestStatus) (rate(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[$__interval]))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{requestStatus}}",
           "refId": "C"
@@ -149,9 +156,9 @@
             "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
-              "graph": false,
               "legend": false,
-              "tooltip": false
+              "tooltip": false,
+              "viz": false
             },
             "lineInterpolation": "smooth",
             "lineWidth": 1,
@@ -160,7 +167,199 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": true
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "90pt"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "95pt"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "99pt"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 4,
+      "interval": "$aggregation",
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.6",
+      "targets": [
+        {
+          "datasource": "Prometheus",
+          "exemplar": true,
+          "expr": "sum(rate(jmeter_response_time_sum{requestName=~\".+XX.+\", testName=\"$project\"}[$__interval]))\n/ sum(rate(jmeter_response_time_count{requestName=~\".+XX.+\", testName=\"$project\"}[$__interval]))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "avg",
+          "refId": "D"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "avg(jmeter_response_time{requestName=~\".+XX.+\", quantile=\"0.9\", testName=\"$project\"} >= 0)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "90pt",
+          "refId": "B"
+        },
+        {
+          "datasource": "Prometheus",
+          "exemplar": true,
+          "expr": "avg(jmeter_response_time{requestName=~\".+XX.+\", quantile=\"0.95\", testName=\"$project\"} >= 0)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "95pt",
+          "refId": "A"
+        },
+        {
+          "datasource": "Prometheus",
+          "expr": "avg(jmeter_response_time{requestName=~\".+XX.+\", quantile=\"0.99\", testName=\"$project\"} >= 0)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "99pt",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Response Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
           },
           "mappings": [],
           "thresholds": {
@@ -184,111 +383,313 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 14
       },
-      "id": 4,
+      "id": 31,
       "interval": "$aggregation",
       "links": [],
       "options": {
-        "graph": {},
         "legend": {
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom"
         },
-        "tooltipOptions": {
+        "tooltip": {
           "mode": "single"
         }
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
-          "datasource": "Prometheus",
-          "expr": "sum(rate(jmeter_response_time_sum{requestName=~\".+XX.+\", testName=\"$project\"}[$scrapeInterval]))\n/ sum(rate(jmeter_response_time_count{requestName=~\".+XX.+\", testName=\"$project\"}[$scrapeInterval]))",
+          "exemplar": true,
+          "expr": "sum(rate(jmeter_response_time_sum{requestName!~\".+XX.+\", testName=\"$project\"}[$__interval]))by(requestName)\n/ sum(rate(jmeter_response_time_count{requestName!~\".+XX.+\", testName=\"$project\"}[$__interval]))by(requestName)",
           "hide": false,
           "interval": "",
-          "legendFormat": "avg",
+          "legendFormat": "avg {{requestName}}",
+          "queryType": "randomWalk",
           "refId": "D"
         },
         {
-          "datasource": "Prometheus",
-          "expr": "avg(jmeter_response_time{requestName=~\".+XX.+\", quantile=\"0.9\", testName=\"$project\"} >= 0)",
+          "expr": "avg(jmeter_response_time{requestName!~\".+XX.+\", quantile=\"0.9\", testName=\"$project\"} >= 0)by(requestName)",
           "format": "time_series",
           "hide": false,
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "90pt {{requestName}}",
+          "queryType": "randomWalk",
           "refId": "B"
+        },
+        {
+          "expr": "avg(jmeter_response_time{requestName!~\".+XX.+\", quantile=\"0.95\", testName=\"$project\"} >= 0)by(requestName)",
+          "format": "time_series",
+          "hide": true,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "95pt {{requestName}}",
+          "queryType": "randomWalk",
+          "refId": "A"
+        },
+        {
+          "expr": "avg(jmeter_response_time{requestName!~\".+XX.+\", quantile=\"0.99\", testName=\"$project\"} >= 0)by(requestName)",
+          "format": "time_series",
+          "hide": true,
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "99pt {{requestName}}",
+          "queryType": "randomWalk",
+          "refId": "C"
         }
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Response Time",
+      "title": "Response Time by Operation",
       "type": "timeseries"
     },
     {
-      "aliasColors": {
-        "D5527: SynchronusSearch": "#e0f9d7",
-        "Maxim: Get Yandex": "purple",
-        "UC01_XX_SearchClient": "super-light-purple",
-        "gatling.users.mean": "super-light-purple",
-        "r2k-l10tsl-js.int.gazprombank.ru": "semi-dark-purple",
-        "r2k-l4tsl-js.int.gazprombank.ru": "dark-blue",
-        "r2k-l5tsl-js.int.gazprombank.ru": "light-blue",
-        "r2k-l6tsl-js.int.gazprombank.ru": "semi-dark-green",
-        "r2k-l7tsl-js.int.gazprombank.ru": "light-yellow",
-        "r2k-l8tsl-js.int.gazprombank.ru": "dark-orange",
-        "r2k-l9tsl-js.int.gazprombank.ru": "semi-dark-red"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
-      "decimals": 2,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": []
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "D5527: SynchronusSearch"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e0f9d7",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Maxim: Get Yandex"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "UC01_XX_SearchClient"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "gatling.users.mean"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l10tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l4tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l5tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l6tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l7tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l8tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "r2k-l9tsl-js.int.gazprombank.ru"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 21
       },
-      "hiddenSeries": false,
       "id": 6,
       "interval": "$aggregation",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "sum by (nodeName, threadGroup) (jmeter_running_threads{testName=\"$project\"})",
@@ -313,210 +714,53 @@
           "refId": "C"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Threads",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "columns": [],
-      "datasource": "-- Mixed --",
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
         },
         "overrides": []
       },
-      "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 28
       },
       "id": 22,
       "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 1,
-        "desc": false
+      "options": {
+        "showHeader": true
       },
-      "styles": [
-        {
-          "alias": "Time",
-          "align": "auto",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "Count",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "Value #A",
-          "thresholds": [],
-          "type": "number",
-          "unit": "none"
-        },
-        {
-          "alias": "Avg",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": false,
-          "mappingType": 1,
-          "pattern": "Value #B",
-          "thresholds": [],
-          "type": "number",
-          "unit": "ms"
-        },
-        {
-          "alias": "90pct",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "#bf1b00",
-            "#bf1b00"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value #C",
-          "thresholds": [
-            ""
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "Errors",
-          "align": "auto",
-          "colorMode": "cell",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "#bf1b00",
-            "#bf1b00"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 1,
-          "mappingType": 1,
-          "pattern": "Value #D",
-          "thresholds": [
-            "0.01"
-          ],
-          "type": "number",
-          "unit": "percentunit"
-        },
-        {
-          "alias": "Request Name",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "requestName",
-          "preserveFormat": false,
-          "sanitize": false,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        },
-        {
-          "alias": "Run ID",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 0,
-          "mappingType": 1,
-          "pattern": "runId",
-          "thresholds": [],
-          "type": "number",
-          "unit": "none"
-        },
-        {
-          "alias": "",
-          "align": "auto",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "8.0.6",
       "targets": [
         {
-          "datasource": "Prometheus",
           "expr": "sum(\n  max_over_time(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)",
           "format": "table",
           "hide": false,
@@ -526,7 +770,6 @@
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
           "expr": "(avg(\n  max_over_time(jmeter_response_time_sum{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])  \n  - min_over_time(jmeter_response_time_sum{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName))\n/(avg(\n  max_over_time(jmeter_response_time_count{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])     \n  - min_over_time(jmeter_response_time_count{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName))",
           "format": "table",
           "hide": false,
@@ -536,7 +779,6 @@
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
           "expr": "avg(\n  avg_over_time(jmeter_response_time_general{requestName=~\".+XX.+\", quantile=\"0.9\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)",
           "format": "table",
           "hide": true,
@@ -546,7 +788,6 @@
           "refId": "C"
         },
         {
-          "datasource": "Prometheus",
           "expr": "sum(\n  max_over_time(jmeter_requests{requestName=~\".+XX.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\".+XX.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)\n/ sum(\n  max_over_time(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)",
           "format": "table",
           "hide": false,
@@ -557,8 +798,7 @@
         }
       ],
       "title": "Aggregate Report",
-      "transform": "table",
-      "type": "table-old"
+      "type": "table"
     },
     {
       "collapsed": false,
@@ -567,7 +807,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 35
       },
       "id": 10,
       "panels": [],
@@ -582,15 +822,16 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "decimals": 2,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "max": 1,
@@ -619,7 +860,7 @@
         "h": 7,
         "w": 4,
         "x": 0,
-        "y": 29
+        "y": 36
       },
       "id": 12,
       "interval": null,
@@ -638,7 +879,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "sum(\n  max_over_time(jmeter_requests{requestName=~\".+XX.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\".+XX.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n)\n/ sum(\n  max_over_time(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\"}[${__range_s}s])\n)",
@@ -655,19 +896,13 @@
     },
     {
       "columns": [],
-      "datasource": "-- Mixed --",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
+      "datasource": "Prometheus",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 10,
         "x": 4,
-        "y": 29
+        "y": 36
       },
       "id": 14,
       "links": [],
@@ -755,11 +990,12 @@
       ],
       "targets": [
         {
-          "datasource": "Prometheus",
           "expr": "sum(\n  max_over_time(jmeter_requests{requestName=~\".+XX.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\".+XX.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)",
           "format": "table",
           "instant": true,
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -770,18 +1006,12 @@
     {
       "columns": [],
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 10,
         "x": 14,
-        "y": 29
+        "y": 36
       },
       "id": 16,
       "links": [],
@@ -899,160 +1129,203 @@
       "type": "table-old"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
-      "decimals": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 7,
-        "w": 24,
-        "x": 0,
-        "y": 36
-      },
-      "hiddenSeries": false,
-      "id": 8,
-      "interval": "$aggregation",
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 10,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum by (responseCode) (rate(jmeter_requests{requestStatus=\"FAIL\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$scrapeInterval]))",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{responseCode}}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Errors by Time",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "decimals": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "links": []
-        },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "504"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
         "y": 43
       },
-      "hiddenSeries": false,
+      "id": 8,
+      "interval": "$aggregation",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.6",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum by (responseCode) (rate(jmeter_requests{requestStatus=\"FAIL\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$__interval]))",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "{{responseCode}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Errors by Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "[TC] UC01_XX_XX"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 50
+      },
       "id": 28,
       "interval": "$aggregation",
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 10,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "sum by (requestName) (jmeter_requests{requestName=~\".+XX.+\", testName=\"$project\", requestStatus=\"FAIL\"})",
@@ -1062,47 +1335,10 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Errors by Operation",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "collapsed": false,
@@ -1111,7 +1347,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 57
       },
       "id": 18,
       "panels": [],
@@ -1119,272 +1355,340 @@
       "type": "row"
     },
     {
-      "aliasColors": {
-        "FAIL": "#bf1b00",
-        "PASS": "#629e51"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": []
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ops"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "FAIL"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#bf1b00",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PASS"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#629e51",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 58
       },
-      "hiddenSeries": false,
       "id": 19,
       "interval": "$aggregation",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
-          "expr": "sum by (requestStatus) (rate(jmeter_requests{requestName=\"$transaction\", testName=\"$project\"}[$scrapeInterval]))",
+          "exemplar": true,
+          "expr": "sum by (requestStatus) (rate(jmeter_requests{requestName=\"$transaction\", testName=\"$project\"}[$__interval]))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{requestStatus}}",
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "TPS - $transaction",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "ops",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {
-        "90pct": "#1f78c1",
-        "avg": "#70dbed"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": []
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "90pct"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#1f78c1",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#70dbed",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 58
       },
-      "hiddenSeries": false,
       "id": 20,
       "interval": "$aggregation",
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
-          "expr": "sum(rate(jmeter_response_time_sum{requestName=\"$transaction\", testName=\"$project\"}[$scrapeInterval]))\n/ sum(rate(jmeter_response_time_count{requestName=\"$transaction\", testName=\"$project\"}[$scrapeInterval]))",
+          "exemplar": true,
+          "expr": "sum(rate(jmeter_response_time_sum{requestName=\"$transaction\", testName=\"$project\"}[$__interval]))\n/ sum(rate(jmeter_response_time_count{requestName=\"$transaction\", testName=\"$project\"}[$__interval]))",
           "format": "time_series",
           "hide": false,
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "avg",
           "refId": "A"
         },
         {
-          "expr": "jmeter_response_time_general{requestName=\"$transaction\", quantile=\"0.9\", testName=\"$project\"}",
+          "exemplar": true,
+          "expr": "avg(jmeter_response_time{requestName=~\".+XX.+\", quantile=\"0.90\", testName=\"$project\"} >= 0)",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "90pct",
           "refId": "B"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Response Time - $transaction",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
-      "decimals": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": []
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
         "overrides": []
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 65
       },
-      "hiddenSeries": false,
       "id": 29,
       "interval": "$aggregation",
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": true,
-        "hideZero": true,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 10,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
           "expr": "sum by (requestName, responseCode) (jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\", requestStatus=\"FAIL\"})",
@@ -1394,63 +1698,20 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Errors",
-      "tooltip": {
-        "shared": true,
-        "sort": 2,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 0,
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "columns": [],
       "datasource": "Prometheus",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 65
+        "y": 72
       },
       "id": 24,
       "links": [],
@@ -1459,7 +1720,7 @@
       "showHeader": true,
       "sort": {
         "col": 1,
-        "desc": false
+        "desc": true
       },
       "styles": [
         {
@@ -1642,19 +1903,13 @@
     },
     {
       "columns": [],
-      "datasource": "-- Mixed --",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
-        "overrides": []
-      },
+      "datasource": "Prometheus",
       "fontSize": "100%",
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 72
+        "y": 79
       },
       "id": 30,
       "links": [],
@@ -1781,7 +2036,6 @@
       ],
       "targets": [
         {
-          "datasource": "Prometheus",
           "expr": "sum(\n  max_over_time(jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)",
           "format": "table",
           "hide": false,
@@ -1791,7 +2045,6 @@
           "refId": "A"
         },
         {
-          "datasource": "Prometheus",
           "expr": "(avg(\n  max_over_time(jmeter_response_time_sum{requestName=~\"^$transactionGroup.*\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])  \n  - min_over_time(jmeter_response_time_sum{requestName=~\"^$transactionGroup.*\", responseMessage!~\"^Number.+\",  testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName))\n/(avg(\n  max_over_time(jmeter_response_time_count{requestName=~\"^$transactionGroup.*\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])     \n  - min_over_time(jmeter_response_time_count{requestName=~\"^$transactionGroup.*\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName))",
           "format": "table",
           "hide": false,
@@ -1801,7 +2054,6 @@
           "refId": "B"
         },
         {
-          "datasource": "Prometheus",
           "expr": "sum(\n  max_over_time(jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", requestStatus=\"FAIL\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)\n/ sum(\n  max_over_time(jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])\n  - min_over_time(jmeter_requests{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[${__range_s}s])\n) by (runId, requestName)",
           "format": "table",
           "hide": false,
@@ -1816,106 +2068,111 @@
       "type": "table-old"
     },
     {
-      "aliasColors": {
-        "[WS] saveApplication": "dark-purple"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
-          "links": []
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "[WS] saveApplication"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 79
+        "y": 86
       },
-      "hiddenSeries": false,
       "id": 26,
       "interval": "$aggregation",
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "sort": "avg",
-        "sortDesc": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.4.3",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
+      "pluginVersion": "8.0.6",
       "targets": [
         {
-          "expr": "sum by (requestName) (rate(jmeter_response_time_sum{requestName=~\"^$transactionGroup\\\\_\\\\d.+\", responseMessage=~\"^Number.+\", testName=\"$project\"}[$scrapeInterval]))\n/ sum by (requestName) (rate(jmeter_response_time_count{requestName=~\"^$transactionGroup\\\\_\\\\d.+\", responseMessage=~\"^Number.+\", testName=\"$project\"}[$scrapeInterval]))",
+          "exemplar": true,
+          "expr": "sum by (requestName) (rate(jmeter_response_time_sum{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$__interval]))\n/ sum by (requestName) (rate(jmeter_response_time_count{requestName=~\"^$transactionGroup.+\", responseMessage=~\"^Number.+\", testName=\"$project\"}[$__interval]))",
           "hide": false,
+          "interval": "",
           "legendFormat": "{{requestName}}",
           "refId": "A"
         }
       ],
-      "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Actions",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "type": "timeseries"
     },
     {
       "aliasColors": {
@@ -1924,10 +2181,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -1938,7 +2194,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 86
+        "y": 93
       },
       "hiddenSeries": false,
       "id": 27,
@@ -1962,7 +2218,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.3",
+      "pluginVersion": "8.0.6",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1972,7 +2228,9 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (requestName) (rate(jmeter_response_time_sum{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$scrapeInterval]))\n/ sum by (requestName) (rate(jmeter_response_time_count{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$scrapeInterval]))",
+          "exemplar": true,
+          "expr": "sum by (requestName) (rate(jmeter_response_time_sum{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$__interval]))\n/ sum by (requestName) (rate(jmeter_response_time_count{requestName=~\"^$transactionGroup.+\", responseMessage!~\"^Number.+\", testName=\"$project\"}[$__interval]))",
+          "interval": "",
           "legendFormat": "{{requestName}}",
           "refId": "A"
         }
@@ -2020,7 +2278,7 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 27,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -2031,8 +2289,8 @@
         "auto_min": "5s",
         "current": {
           "selected": false,
-          "text": "5s",
-          "value": "5s"
+          "text": "30s",
+          "value": "30s"
         },
         "description": null,
         "error": null,
@@ -2046,7 +2304,7 @@
             "value": "$__auto_interval_aggregation"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "5s",
             "value": "5s"
           },
@@ -2056,7 +2314,7 @@
             "value": "10s"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "30s",
             "value": "30s"
           },
@@ -2091,8 +2349,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "Gostech Smoke",
-          "value": "Gostech Smoke"
+          "text": "Gostech new LB IAM",
+          "value": "Gostech new LB IAM"
         },
         "datasource": "Prometheus",
         "definition": "label_values(jmeter_active_threads, testName)",
@@ -2106,14 +2364,13 @@
         "options": [],
         "query": {
           "query": "label_values(jmeter_active_threads, testName)",
-          "refId": "Prometheus-project-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2122,8 +2379,8 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "[TC] UC01_02_XX_RandomReuest",
-          "value": "[TC] UC01_02_XX_RandomReuest"
+          "text": "[TC] UC01_XX_XX",
+          "value": "[TC] UC01_XX_XX"
         },
         "datasource": "Prometheus",
         "definition": "label_values(jmeter_requests{testName=\"$project\"}, requestName)",
@@ -2137,14 +2394,13 @@
         "options": [],
         "query": {
           "query": "label_values(jmeter_requests{testName=\"$project\"}, requestName)",
-          "refId": "Prometheus-transaction-Variable-Query"
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "/XX/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2157,7 +2413,7 @@
           "value": "UC01"
         },
         "datasource": "Prometheus",
-        "definition": "jmeter_requests{requestName=\"$transaction\"}",
+        "definition": "\tjmeter_requests{requestName=\"$transaction\"}",
         "description": null,
         "error": null,
         "hide": 2,
@@ -2167,15 +2423,14 @@
         "name": "transactionGroup",
         "options": [],
         "query": {
-          "query": "jmeter_requests{requestName=\"$transaction\"}",
-          "refId": "Prometheus-transactionGroup-Variable-Query"
+          "query": "\tjmeter_requests{requestName=\"$transaction\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "regex": "/(UC\\d{2})/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -2193,8 +2448,8 @@
     ]
   },
   "time": {
-    "from": "2021-03-02T15:16:36.545Z",
-    "to": "2021-03-02T15:18:00.382Z"
+    "from": "now-1h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -2222,7 +2477,7 @@
     ]
   },
   "timezone": "",
-  "title": "SLA 2.0",
-  "uid": "sDNJyW6Zk",
-  "version": 1
+  "title": "SLA 2.0 New",
+  "uid": "InTheBus",
+  "version": 5
 }
