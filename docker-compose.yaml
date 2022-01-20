@@ -37,6 +37,7 @@ services:
       - ./preconfigure/grafana/datasources:/etc/grafana/provisioning/datasources
       - ./preconfigure/grafana/dashboards:/etc/grafana/provisioning/dashboards
     environment:
+      - GF_INSTALL_PLUGINS=https://github.com/cloudspout/cloudspout-button-panel/releases/download/7.0.23/cloudspout-button-panel.zip;cloudspout-button-panel
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
