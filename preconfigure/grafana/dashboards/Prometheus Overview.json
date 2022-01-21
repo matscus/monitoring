@@ -3,7 +3,7 @@
       "list": [
         {
           "builtIn": 1,
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
@@ -27,7 +27,7 @@
     "links": [],
     "panels": [
       {
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -83,7 +83,7 @@
         "type": "stat"
       },
       {
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -139,7 +139,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -213,7 +213,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "The total number of rule group evaluations missed due to slow rule group evaluation.",
         "fieldConfig": {
           "defaults": {
@@ -295,7 +295,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "Sum of all skipped scrapes",
         "fieldConfig": {
           "defaults": {
@@ -374,7 +374,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -456,7 +456,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -537,7 +537,7 @@
         "type": "stat"
       },
       {
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -597,7 +597,7 @@
       },
       {
         "columns": [],
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "",
         "fontSize": "100%",
         "gridPos": {
@@ -678,7 +678,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "description": "Total number of time series in prometheus",
         "fieldConfig": {
           "defaults": {
@@ -759,7 +759,7 @@
       },
       {
         "cacheTimeout": null,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -837,7 +837,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -851,7 +851,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "All non-zero failures and errors",
             "fill": 1,
             "fillGradient": 0,
@@ -1097,7 +1097,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1111,7 +1111,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -1205,7 +1205,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -1298,7 +1298,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1312,7 +1312,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -1404,7 +1404,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -1510,7 +1510,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1526,7 +1526,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "Rate of total number of appended samples",
             "fill": 1,
             "fillGradient": 0,
@@ -1620,7 +1620,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1634,7 +1634,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "Total number of syncs that were executed on a scrape pool.",
             "fill": 1,
             "fillGradient": 0,
@@ -1728,7 +1728,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "Actual interval to sync the scrape pool.",
             "fill": 1,
             "fillGradient": 0,
@@ -1822,7 +1822,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -1836,7 +1836,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -1928,7 +1928,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "Total number of rejected scrapes",
             "fill": 1,
             "fillGradient": 0,
@@ -2050,7 +2050,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -2064,7 +2064,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "",
             "fill": 1,
             "fillGradient": 0,
@@ -2159,7 +2159,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fieldConfig": {
               "defaults": {
                 "unit": "s"
@@ -2260,7 +2260,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -2352,7 +2352,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "Rule-group evaluations \n - total\n - missed due to slow rule group evaluation\n - skipped due to throttled metric storage",
             "fill": 1,
             "fillGradient": 0,
@@ -2466,7 +2466,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -2480,7 +2480,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -2573,7 +2573,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -2587,7 +2587,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -2679,7 +2679,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -2773,7 +2773,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -2787,7 +2787,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "GC invocation durations",
             "fill": 1,
             "fillGradient": 0,
@@ -2881,7 +2881,7 @@
       },
       {
         "collapsed": true,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "gridPos": {
           "h": 1,
           "w": 24,
@@ -2895,7 +2895,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "description": "This is probably wrong!  Please help.",
             "fill": 1,
             "fillGradient": 0,
@@ -3131,7 +3131,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -3223,7 +3223,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "Prometheus_main_storage",
+            "datasource": "Victoria_metrics",
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -3329,7 +3329,7 @@
             "text": "prometheus",
             "value": "prometheus"
           },
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "definition": "label_values(prometheus_engine_queries, job)",
           "description": null,
           "error": null,
@@ -3359,7 +3359,7 @@
             "text": "localhost:9090",
             "value": "localhost:9090"
           },
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "definition": "label_values(prometheus_engine_queries{job=\"$job\"}, instance)",
           "description": null,
           "error": null,

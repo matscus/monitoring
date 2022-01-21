@@ -2,6 +2,13 @@ global:
   scrape_interval:     10s
   evaluation_interval: 10s
 
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+       - alert_manager:9093
+
 rule_files:
    - "linux_host_rules.yml"
    - "postgres_rules.yml"
@@ -16,7 +23,7 @@ scrape_configs:
     static_configs:
       - targets: ['nodeexporter:9100']
         labels:
-          group: 'NT '
+          group: 'BUS'
           service: 'MyLeg'
 
   - job_name: 'cadvisor'
@@ -24,7 +31,7 @@ scrape_configs:
     static_configs:
       - targets: ['cadvisor:8080']
         labels:
-          group: 'NT '
+          group: 'BUS '
           service: 'MyLeg'
 
   - job_name: 'prometheus'
@@ -32,11 +39,33 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
         labels:
-          group: 'NT '
+          group: 'BUS '
           service: 'MyLeg'
-
+          
+  - job_name: 'victoria_metrics'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['victoria_metrics:8428']
+        labels:
+          group: 'BUS'
+          service: 'MyLeg'
+  - job_name: 'vmagent'
+    static_configs:
+      - targets: ['vmagent:8429']
+        labels:
+          group: 'BUS'
+          service: 'MyLeg'
+  - job_name: 'vmalert'
+    static_configs:
+      - targets: ['vmalert:8880']
+        labels:
+          group: 'BUS'
+          service: 'MyLeg'
+      
   - job_name: 'jmeter'
     scrape_interval: 5s
     static_configs:
       - targets: ['host.docker.internal:9001']
 
+remote_write:
+  - url: http://victoria_metrics:8428/api/v1/write

@@ -3,7 +3,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -28,7 +28,7 @@
   "panels": [
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -38,7 +38,7 @@
       "id": 86,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -100,7 +100,7 @@
           "type": "bargauge"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -168,7 +168,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -178,7 +178,7 @@
       "id": 87,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -377,7 +377,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -500,7 +500,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -614,7 +614,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -765,7 +765,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -896,7 +896,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -906,7 +906,7 @@
       "id": 88,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1010,7 +1010,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1120,7 +1120,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1130,7 +1130,7 @@
       "id": 89,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1234,7 +1234,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1336,7 +1336,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1346,7 +1346,7 @@
       "id": 90,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1442,7 +1442,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1544,7 +1544,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1554,7 +1554,7 @@
       "id": 91,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1667,7 +1667,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1786,7 +1786,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1796,7 +1796,7 @@
       "id": 92,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1892,7 +1892,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -1994,7 +1994,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2004,7 +2004,7 @@
       "id": 93,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2101,7 +2101,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2198,7 +2198,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2294,7 +2294,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2390,7 +2390,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2509,7 +2509,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2632,7 +2632,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "editable": true,
           "error": false,
@@ -2731,7 +2731,7 @@
           }
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2856,7 +2856,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2866,7 +2866,7 @@
       "id": 94,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2962,7 +2962,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3064,7 +3064,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3074,7 +3074,7 @@
       "id": 95,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3184,7 +3184,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3194,7 +3194,7 @@
       "id": 96,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3296,7 +3296,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3306,7 +3306,7 @@
       "id": 97,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3402,7 +3402,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3504,7 +3504,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3514,7 +3514,7 @@
       "id": 98,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -3609,7 +3609,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3731,7 +3731,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3741,7 +3741,7 @@
       "id": 99,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -3842,7 +3842,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -3852,7 +3852,7 @@
       "id": 100,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -3948,7 +3948,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -4044,7 +4044,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -4140,7 +4140,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -4242,7 +4242,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -4252,7 +4252,7 @@
       "id": 101,
       "panels": [
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -4352,7 +4352,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "decimals": 1,
           "description": "",
           "editable": true,
@@ -4451,7 +4451,7 @@
           }
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -4547,7 +4547,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -4643,7 +4643,7 @@
           "type": "timeseries"
         },
         {
-          "datasource": "Prometheus_main_storage",
+          "datasource": "Victoria_metrics",
           "description": "",
           "fieldConfig": {
             "defaults": {

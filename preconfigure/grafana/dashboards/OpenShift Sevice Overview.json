@@ -3,7 +3,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -27,7 +27,7 @@
   "panels": [
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -122,7 +122,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -213,7 +213,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -345,7 +345,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -476,7 +476,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -595,7 +595,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -700,7 +700,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -813,7 +813,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1304,7 +1304,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1825,7 +1825,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1994,7 +1994,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2306,7 +2306,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2777,7 +2777,7 @@
     },
     {
       "collapsed": true,
-      "datasource": "Prometheus_main_storage",
+      "datasource": "Victoria_metrics",
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -2983,7 +2983,7 @@
           "text": "gt-sol-nt2-coreplatform-01",
           "value": "gt-sol-nt2-coreplatform-01"
         },
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "definition": "label_values(kube_namespace_created, namespace)",
         "description": null,
         "error": null,
@@ -3017,7 +3017,7 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus_main_storage",
+        "datasource": "Victoria_metrics",
         "definition": "label_values(pod:container_cpu_usage:sum{namespace=\"$project_mg\"}, pod)",
         "description": null,
         "error": null,

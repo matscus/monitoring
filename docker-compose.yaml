@@ -3,12 +3,85 @@ version: '3.7'
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    victoria_metrics_data: {}
+    vmagent_data: {}
 
 networks:
    monitoring:
      driver: bridge
 
 services:
+  vmagent:
+    image: victoriametrics/vmagent
+    container_name: vmagent
+    depends_on:
+      - "victoria_metrics"
+    ports:
+      - 8429:8429
+    volumes:
+      - vmagent_data:/vmagentdata
+    command:
+      - '--remoteWrite.url=http://victoria_metrics:8428/api/v1/write'
+    networks:
+      - monitoring
+
+  vmalert:
+    image: victoriametrics/vmalert
+    container_name: vmalert
+    depends_on:
+      - "victoria_metrics"
+      - "alert_manager"
+    ports:
+      - 8880:8880
+    volumes:
+      - ./preconfigure/alert_manager/alerts.yml:/etc/alerts/alerts.yml
+    command:
+      - '--datasource.url=http://victoria_metrics:8428/'
+      - '--remoteRead.url=http://victoria_metrics:8428/'
+      - '--remoteWrite.url=http://victoria_metrics:8428/'
+      - '--notifier.url=http://alert_manager:9093/'
+      - '--rule=/etc/alerts/*.yml'
+      - '--external.url=http://127.0.0.1:3000' 
+      - '--external.alert.source=explore?orgId=1&left=["now-1h","now","VictoriaMetrics",{"expr":"{{$$expr|quotesEscape|crlfEscape|queryEscape}}"},{"mode":"Metrics"},{"ui":[true,true,true,"none"]}]' 
+    networks:
+      - monitoring
+
+  alertmanager:
+    image:  prom/alertmanager
+    container_name: alert_manager
+    volumes:
+      - ./preconfigure/alert_manager/alertmanager.yml:/config/alertmanager.yml
+    command:
+      - '--config.file=/config/alertmanager.yml'
+    ports:
+      - 9093:9093
+    networks:
+      - monitoring
+
+  victoria_metrics:
+    image: victoriametrics/victoria-metrics
+    container_name: victoria_metrics  
+    volumes:
+      - victoria_metrics_data:/victoria-metrics-data
+    command:
+      - '--retentionPeriod=7d'
+      - '--storageDataPath=/storage'
+      - '--graphiteListenAddr=:2003'
+      - '--opentsdbListenAddr=:4242'
+      - '--httpListenAddr=:8428'
+      - '--influxListenAddr=:8089'
+    ports:
+      - 8428:8428
+      - 8089:8089
+      - 8089:8089/udp
+      - 2003:2003
+      - 2003:2003/udp
+      - 4242:4242
+    networks:
+      - monitoring
+    labels:
+      org.label-schema.group: "monitoring"   
+      
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -20,8 +93,10 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention=200h'
+      - '--storage.tsdb.retention=1h'
       - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+      - '--enable-feature=remote-write-receiver'
     ports:
       - 9090:9090
     networks:
@@ -49,7 +124,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: google/cadvisor
+    image: gcr.io/cadvisor/cadvisor:v0.43.0
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
