@@ -2,12 +2,12 @@
 # The alerts below are just recommendations and may require some updates
 # and threshold calibration according to every specific setup.
 groups:
-  - name: vm-health
+  - name: health
     # note the `job` filter and update accordingly to your setup
     rules:
       # note the `job` filter and update accordingly to your setup
       - alert: TooManyRestarts
-        expr: changes(process_start_time_seconds{job=~"victoriametrics|vmagent|vmalert"}[15m]) > 2
+        expr: changes(process_start_time_seconds{job!~"jmeter"}[15m]) > 2
         labels:
           severity: critical
         annotations:
@@ -16,7 +16,7 @@ groups:
             It might be crashlooping."
 
       - alert: ServiceDown
-        expr: up{job=~"victoriametrics|vmagent|vmalert"} == 0
+        expr: up{job!~"jmeter"} == 0
         for: 2m
         labels:
           severity: critical
@@ -68,7 +68,7 @@ groups:
         labels:
           severity: critical
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=73&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=73&var-instance={{ $labels.instance }}"
           summary: "Instance {{ $labels.instance }} will run out of disk space soon"
           description: "Taking into account current ingestion rate, free disk space will be enough only
             for {{ $value | humanizeDuration }} on instance {{ $labels.instance }}.\n
@@ -85,7 +85,7 @@ groups:
         labels:
           severity: critical
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=53&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=53&var-instance={{ $labels.instance }}"
           summary: "Instance {{ $labels.instance }} will run out of disk space soon"
           description: "Disk utilisation on instance {{ $labels.instance }} is more than 80%.\n
             Having less than 20% of free disk space could cripple merges processes and overall performance.
@@ -97,7 +97,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=35&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=35&var-instance={{ $labels.instance }}"
           summary: "Too many errors served for path {{ $labels.path }} (instance {{ $labels.instance }})"
           description: "Requests to path {{ $labels.path }} are receiving errors.
             Please verify if clients are sending correct requests."
@@ -108,7 +108,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=59&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=59&var-instance={{ $labels.instance }}"
           summary: "VictoriaMetrics on instance {{ $labels.instance }} is constantly hitting concurrent flushes limit"
           description: "The limit of concurrent flushes on instance {{ $labels.instance }} is equal to number of CPUs.\n
             When VictoriaMetrics constantly hits the limit it means that storage is overloaded and requires more CPU."
@@ -119,7 +119,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=67&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=67&var-instance={{ $labels.instance }}"
           summary: "Too many logs printed for job \"{{ $labels.job }}\" ({{ $labels.instance }})"
           description: "Logging rate for job \"{{ $labels.job }}\" ({{ $labels.instance }}) is {{ $value }} for last 15m.\n
            Worth to check logs for specific error messages."
@@ -130,7 +130,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=58&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=58&var-instance={{ $labels.instance }}"
           summary: "Some rows are rejected on \"{{ $labels.instance }}\" on ingestion attempt"
           description: "VM is rejecting to ingest rows on \"{{ $labels.instance }}\" due to the
             following reason: \"{{ $labels.reason }}\""
@@ -146,7 +146,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=66&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=66&var-instance={{ $labels.instance }}"
           summary: "Churn rate is more than 10% on \"{{ $labels.instance }}\" for the last 15m"
           description: "VM constantly creates new time series on \"{{ $labels.instance }}\".\n
             This effect is known as Churn Rate.\n
@@ -162,7 +162,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=66&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=66&var-instance={{ $labels.instance }}"
           summary: "Too high number of new series on \"{{ $labels.instance }}\" created over last 24h"
           description: "The number of created new time series over last 24h is 3x times higher than
             current number of active series on \"{{ $labels.instance }}\".\n
@@ -181,7 +181,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=68&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=68&var-instance={{ $labels.instance }}"
           summary: "Percentage of slow inserts is more than 50% on \"{{ $labels.instance }}\" for the last 15m"
           description: "High rate of slow inserts on \"{{ $labels.instance }}\" may be a sign of resource exhaustion
             for the current load. It is likely more RAM is needed for optimal handling of the current number of active time series."
@@ -192,7 +192,7 @@ groups:
         labels:
           severity: warning
         annotations:
-          dashboard: "http://localhost:3000/d/wNf0q_kZk?viewPanel=74&var-instance={{ $labels.instance }}"
+          dashboard: "http://localhost:3000/d/h9Pigkxnk?viewPanel=74&var-instance={{ $labels.instance }}"
           summary: "Metrics ingested in ({{ $labels.instance }}) are exceeding labels limit"
           description: "VictoriaMetrics limits the number of labels per each metric with `-maxLabelsPerTimeseries` command-line flag.\n
            This prevents from ingesting metrics with too many labels. Please verify that `-maxLabelsPerTimeseries` is configured
