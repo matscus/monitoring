@@ -75,7 +75,7 @@ services:
       - 8089:8089
       - 8089:8089/udp
       - 2003:2003
-      - 2003:2003/udp
+      #- 3003:2003/udp
       - 4242:4242
     networks:
       - monitoring
@@ -159,3 +159,21 @@ services:
       - monitoring
     labels:
       org.label-schema.group: "monitoring"
+  
+  statsd-exporter:
+    image: prom/statsd-exporter
+    container_name: statsd_exporter
+    volumes:
+      - ./preconfigure/statsd/statsd_mapping.yml:/tmp/statsd_mapping.yml
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--statsd.mapping-config=/tmp/statsd_mapping.yml'
+    ports:
+      - 9102:9102
+      - 9125:9125
+      - 10000:9125/udp
+    networks:
+      - monitoring
+    labels:
+      org.label-schema.group: "monitoring"    
